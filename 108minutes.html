@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>108 минут — Космос начинается в Москве</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;700;900&family=Mulish:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --g:#00ff88;--g2:#00cc6a;--g3:#007a3d;
+  --dark:#020d06;--dark2:#041a0c;
+  --glow:0 0 20px rgba(0,255,136,0.4);
+  --glow2:0 0 40px rgba(0,255,136,0.2);
+  --glass:rgba(0,255,136,0.04);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:#020d06;color:#c8f5dc;font-family:'Mulish',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+.cursor{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(0,255,136,0.5);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.15s ease;mix-blend-mode:screen}
+
+#stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d) infinite ease-in-out var(--delay)}
+@keyframes twinkle{0%,100%{opacity:var(--min-op);transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:1}
+
+.grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,255,136,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(2,13,6,0.9) 0%,transparent 100%);backdrop-filter:blur(2px)}
+.nav-logo{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.2em;color:var(--g);text-shadow:var(--glow)}
+.nav-right{font-size:10px;letter-spacing:0.3em;color:rgba(200,245,220,0.3);text-transform:uppercase}
+
+/* HERO */
+#hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;z-index:2;overflow:hidden}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,255,136,0.07);animation:rotate var(--spd) linear infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.hero-orb{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(0,255,136,0.12) 0%,transparent 70%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:0.8}50%{transform:scale(1.1);opacity:1}}
+.hero-kicker{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:var(--g);margin-bottom:24px;opacity:0;animation:fadeUp 1s 0.3s forwards}
+h1{font-family:'Unbounded',sans-serif;font-size:clamp(48px,9vw,96px);font-weight:900;line-height:0.95;color:#fff;text-shadow:0 0 80px rgba(0,255,136,0.3);opacity:0;animation:fadeUp 1s 0.5s forwards}
+h1 span{color:var(--g);text-shadow:var(--glow)}
+.hero-sub{font-size:13px;letter-spacing:0.15em;color:rgba(200,245,220,0.5);margin-top:20px;opacity:0;animation:fadeUp 1s 0.8s forwards}
+.hero-cta{margin-top:48px;opacity:0;animation:fadeUp 1s 1.1s forwards}
+.btn{font-family:'Unbounded',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:14px 36px;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block}
+.btn-primary{background:var(--g);color:#020d06;font-weight:700;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.btn-primary:hover{background:#fff;box-shadow:var(--glow),var(--glow2)}
+.scroll-hint{position:absolute;bottom:40px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.5s forwards}
+.scroll-hint span{font-size:9px;letter-spacing:0.4em;color:rgba(200,245,220,0.3)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--g),transparent);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION HEADER */
+.section-header{text-align:center;padding:100px 48px 60px;position:relative;z-index:2}
+.section-label{font-size:9px;letter-spacing:0.6em;color:var(--g);text-transform:uppercase;margin-bottom:16px}
+.section-title{font-family:'Unbounded',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;color:#fff;line-height:1.1}
+.section-title span{color:var(--g)}
+.section-line{width:60px;height:1px;background:var(--g);margin:24px auto 0;box-shadow:var(--glow)}
+
+/* PAGE TRANSITION */
+.page-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#020d06;z-index:500;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s}
+.page-overlay.active{opacity:1;pointer-events:all}
+.overlay-loader{width:60px;height:60px;border:1px solid rgba(0,255,136,0.2);border-top-color:var(--g);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.overlay-text{font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:0.3em;color:var(--g);text-align:center}
+
+/* TOURS */
+#tours{position:relative;z-index:2;padding:0 48px 100px}
+.tours-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1200px;margin:0 auto}
+.tour-card{position:relative;overflow:hidden;cursor:pointer;background:var(--glass);border:1px solid rgba(0,255,136,0.08);transition:all 0.5s cubic-bezier(0.23,1,0.32,1);padding:48px 36px}
+.tour-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(0,255,136,0.05) 0%,transparent 60%);opacity:0;transition:opacity 0.5s}
+.tour-card:hover{border-color:rgba(0,255,136,0.3);transform:translateY(-4px)}
+.tour-card:hover::before{opacity:1}
+.tour-number{font-family:'Unbounded',sans-serif;font-size:64px;font-weight:900;color:rgba(0,255,136,0.06);line-height:1;margin-bottom:16px;transition:color 0.5s}
+.tour-card:hover .tour-number{color:rgba(0,255,136,0.12)}
+.tour-label{font-size:9px;letter-spacing:0.5em;color:var(--g);text-transform:uppercase;margin-bottom:12px}
+.tour-name{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2}
+.tour-theme{font-size:12px;color:rgba(200,245,220,0.5);line-height:1.6;margin-bottom:32px}
+.tour-stops{display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
+.stop{display:flex;align-items:flex-start;gap:10px;font-size:11px;color:rgba(200,245,220,0.6);line-height:1.4;padding:8px 12px;border-left:1px solid rgba(0,255,136,0.15);transition:all 0.3s}
+.tour-card:hover .stop{border-left-color:rgba(0,255,136,0.3)}
+.stop-num{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--g);font-weight:700;min-width:16px;margin-top:1px}
+.tour-cta{font-family:'Unbounded',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--g);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.tour-cta-arrow{width:24px;height:1px;background:var(--g);position:relative;transition:width 0.3s}
+.tour-cta-arrow::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-right:1px solid var(--g);border-top:1px solid var(--g);transform:rotate(45deg)}
+.tour-card:hover .tour-cta-arrow{width:40px}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(2,13,6,0.96);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
+.modal-bg.open{display:flex}
+.modal{background:#041a0c;border:1px solid rgba(0,255,136,0.15);max-width:760px;width:92%;max-height:88vh;overflow-y:auto;position:relative;animation:modalIn 0.4s cubic-bezier(0.23,1,0.32,1)}
+.modal::-webkit-scrollbar{width:3px}
+.modal::-webkit-scrollbar-track{background:transparent}
+.modal::-webkit-scrollbar-thumb{background:rgba(0,255,136,0.3);border-radius:2px}
+@keyframes modalIn{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:none}}
+.modal-header{padding:32px 40px 0;display:flex;justify-content:space-between;align-items:flex-start}
+.modal-close{background:transparent;border:1px solid rgba(0,255,136,0.2);cursor:pointer;font-size:14px;color:var(--g);padding:8px 14px;font-family:'Unbounded',sans-serif;transition:all 0.3s;flex-shrink:0}
+.modal-close:hover{background:rgba(0,255,136,0.08);border-color:var(--g)}
+.modal-body{padding:24px 40px 40px}
+.modal-tour-num{font-family:'Unbounded',sans-serif;font-size:72px;font-weight:900;color:rgba(0,255,136,0.06);line-height:1;margin-bottom:4px}
+.modal-tour-title{font-family:'Unbounded',sans-serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
+.modal-tour-theme{font-size:13px;color:rgba(200,245,220,0.5);margin-bottom:32px;line-height:1.7;border-left:2px solid var(--g);padding-left:16px}
+.modal-stops-label{font-size:9px;letter-spacing:0.5em;color:var(--g);text-transform:uppercase;margin-bottom:20px}
+
+/* STOP CARD */
+.modal-stop{border:1px solid rgba(0,255,136,0.08);margin-bottom:16px;transition:border-color 0.3s;overflow:hidden}
+.modal-stop:hover{border-color:rgba(0,255,136,0.2)}
+.stop-photo{width:100%;height:180px;background:#020d06;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-bottom:1px solid rgba(0,255,136,0.08)}
+.stop-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity 0.3s}
+.stop-photo img:hover{opacity:1}
+.stop-photo-placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;width:100%;height:100%}
+.photo-upload-hint{font-size:9px;letter-spacing:0.3em;color:rgba(0,255,136,0.3);text-transform:uppercase;text-align:center}
+.photo-icon{font-size:28px;opacity:0.3}
+.stop-photo-corner{position:absolute;width:14px;height:14px;border-color:rgba(0,255,136,0.25);border-style:solid}
+.stop-photo-corner.tl{top:8px;left:8px;border-width:1px 0 0 1px}
+.stop-photo-corner.tr{top:8px;right:8px;border-width:1px 1px 0 0}
+.stop-photo-corner.bl{bottom:8px;left:8px;border-width:0 0 1px 1px}
+.stop-photo-corner.br{bottom:8px;right:8px;border-width:0 1px 1px 0}
+
+.stop-info{padding:18px 20px}
+.stop-info-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.stop-info-left{display:flex;align-items:flex-start;gap:12px}
+.stop-badge{font-family:'Unbounded',sans-serif;font-size:9px;color:var(--g);font-weight:700;background:rgba(0,255,136,0.08);padding:5px 10px;flex-shrink:0;margin-top:2px}
+.stop-name{font-weight:500;color:#fff;font-size:14px;line-height:1.3}
+.stop-map-link{display:inline-flex;align-items:center;gap:6px;font-size:9px;letter-spacing:0.2em;color:var(--g);text-decoration:none;text-transform:uppercase;border:1px solid rgba(0,255,136,0.2);padding:6px 12px;transition:all 0.3s;white-space:nowrap;flex-shrink:0}
+.stop-map-link:hover{background:rgba(0,255,136,0.08);border-color:var(--g)}
+.stop-map-link svg{width:11px;height:11px;fill:none;stroke:var(--g);stroke-width:2}
+.stop-desc{font-size:12px;color:rgba(200,245,220,0.55);line-height:1.75}
+.stop-coords{font-family:'Unbounded',sans-serif;font-size:9px;color:rgba(0,255,136,0.4);letter-spacing:0.08em;margin-top:10px}
+
+.modal-footer{margin-top:32px;padding-top:24px;border-top:1px solid rgba(0,255,136,0.08)}
+.modal-meaning-label{font-size:9px;letter-spacing:0.4em;color:var(--g);text-transform:uppercase;margin-bottom:12px}
+.modal-meaning{font-size:13px;color:rgba(200,245,220,0.6);line-height:1.8}
+
+/* FOOTER */
+footer{position:relative;z-index:2;padding:60px 48px;border-top:1px solid rgba(0,255,136,0.06);display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:0.3em;color:var(--g)}
+.footer-copy{font-size:11px;color:rgba(200,245,220,0.25);letter-spacing:0.1em}
+
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .tours-grid{grid-template-columns:1fr}
+  #tours{padding:0 20px 60px}
+  .section-header{padding:60px 20px 40px}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:40px 20px}
+  .modal-body,.modal-header{padding-left:20px;padding-right:20px}
+  .stop-info-header{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div id="stars"></div>
+
+<div class="page-overlay" id="pageOverlay">
+  <div>
+    <div class="overlay-loader"></div>
+    <div class="overlay-text">Загрузка маршрута</div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div></div>
+      <button class="modal-close" onclick="closeModal()">✕ закрыть</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo">108 минут</div>
+  <div class="nav-right">Космос начинается в Москве</div>
+</nav>
+
+<section id="hero">
+  <div class="hero-ring" style="width:600px;height:600px;--spd:60s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="hero-ring" style="width:900px;height:900px;--spd:100s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="hero-ring" style="width:1200px;height:1200px;--spd:140s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-kicker">Виртуальный музей · Москва · 2024</div>
+  <h1>108<br><span>минут</span></h1>
+  <div class="hero-sub">Космос начинается в Москве</div>
+  <div class="hero-cta">
+    <a href="#tours" class="btn btn-primary">Начать путешествие</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Листайте вниз</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="section-header">
+  <div class="section-label">Три маршрута</div>
+  <div class="section-title">Выберите <span>экскурсию</span></div>
+  <div class="section-line"></div>
+</div>
+
+<section id="tours">
+  <div class="tours-grid">
+
+    <div class="tour-card" onclick="openTour(0)">
+      <div class="tour-number">01</div>
+      <div class="tour-label">Экскурсия I</div>
+      <div class="tour-name">Орбита<br>памяти</div>
+      <div class="tour-theme">История космоса и память о космической эпохе в современной Москве</div>
+      <div class="tour-stops">
+        <div class="stop"><span class="stop-num">1</span><span>Павильон «Космос» на ВДНХ</span></div>
+        <div class="stop"><span class="stop-num">2</span><span>Аллея космонавтов</span></div>
+        <div class="stop"><span class="stop-num">3</span><span>Монумент «Покорителям космоса»</span></div>
+        <div class="stop"><span class="stop-num">4</span><span>Музей космонавтики</span></div>
+        <div class="stop"><span class="stop-num">5</span><span>Останкинская телебашня</span></div>
+      </div>
+      <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+    </div>
+
+    <div class="tour-card" onclick="openTour(1)">
+      <div class="tour-number">02</div>
+      <div class="tour-label">Экскурсия II</div>
+      <div class="tour-name">Технологии<br>будущего</div>
+      <div class="tour-theme">Космос, инженерия, связь и современные технологии России</div>
+      <div class="tour-stops">
+        <div class="stop"><span class="stop-num">1</span><span>Центр «Космонавтика и авиация» на ВДНХ</span></div>
+        <div class="stop"><span class="stop-num">2</span><span>Шуховская башня</span></div>
+        <div class="stop"><span class="stop-num">3</span><span>Останкинская телебашня</span></div>
+        <div class="stop"><span class="stop-num">4</span><span>Инновационный центр «Сколково»</span></div>
+        <div class="stop"><span class="stop-num">5</span><span>Штаб-квартира Роскосмоса</span></div>
+      </div>
+      <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+    </div>
+
+    <div class="tour-card" onclick="openTour(2)">
+      <div class="tour-number">03</div>
+      <div class="tour-label">Экскурсия III</div>
+      <div class="tour-name">Человек<br>и космос</div>
+      <div class="tour-theme">Влияние космоса на культуру, архитектуру и общество</div>
+      <div class="tour-stops">
+        <div class="stop"><span class="stop-num">1</span><span>Мемориальный музей космонавтики</span></div>
+        <div class="stop"><span class="stop-num">2</span><span>Памятник Юрию Гагарину</span></div>
+        <div class="stop"><span class="stop-num">3</span><span>Московский планетарий</span></div>
+        <div class="stop"><span class="stop-num">4</span><span>ВДНХ и советская архитектура</span></div>
+        <div class="stop"><span class="stop-num">5</span><span>Парк «Зарядье»</span></div>
+      </div>
+      <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">108 МИНУТ · МОСКВА</div>
+  <div class="footer-copy">Космос начинается в Москве · 2024</div>
+</footer>
+
+<script>
+const tours=[
+  {
+    num:'01',name:'Орбита памяти',
+    theme:'История космоса и память о космической эпохе в Москве — маршрут по местам, которые сохранили дух великой эры.',
+    stops:[
+      {
+        name:'Павильон «Космос» на ВДНХ',
+        desc:'Грандиозный павильон № 34, перестроенный в 1954 году, стал первым в СССР публичным космическим музеем. Экспозиция включает подлинные спускаемые аппараты, скафандры и уникальные архивные материалы.',
+        coords:'55°49\'33″ с.ш. · 37°37\'52″ в.д.',
+        map:'https://maps.google.com/?q=55.8258,37.6311',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/VDNKh_Cosmos_pavilion.jpg/800px-VDNKh_Cosmos_pavilion.jpg'
+      },
+      {
+        name:'Аллея космонавтов',
+        desc:'Аллея длиной около 400 метров украшена бюстами советских и российских космонавтов — живая летопись пилотируемой космонавтики от Гагарина до наших дней. Место ежегодных официальных церемоний.',
+        coords:'55°49\'16″ с.ш. · 37°38\'30″ в.д.',
+        map:'https://maps.google.com/?q=55.8211,37.6417',
+        photo:''
+      },
+      {
+        name:'Монумент «Покорителям космоса»',
+        desc:'107-метровый обелиск в форме реактивной струи ракеты, покрытый полированным титаном. Открыт в 1964 году. Видно с расстояния нескольких километров — визуальный якорь северо-востока Москвы.',
+        coords:'55°49\'19″ с.ш. · 37°38\'24″ в.д.',
+        map:'https://maps.google.com/?q=55.8220,37.6400',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Monument_to_the_Conquerors_of_Space_2.jpg/800px-Monument_to_the_Conquerors_of_Space_2.jpg'
+      },
+      {
+        name:'Музей космонавтики',
+        desc:'Расположен в стилобате монумента. Коллекция насчитывает свыше 85 000 экспонатов: лунные породы, личные вещи космонавтов, оборудование станции «Мир», уникальные фото- и видеоматериалы.',
+        coords:'55°49\'19″ с.ш. · 37°38\'16″ в.д.',
+        map:'https://maps.google.com/?q=55.8220,37.6378',
+        photo:''
+      },
+      {
+        name:'Останкинская телебашня',
+        desc:'Построена в 1967 году специально для трансляции первых советских цветных передач и сигнала со спутников. Долгое время была высочайшим сооружением мира — 540 метров.',
+        coords:'55°49\'12″ с.ш. · 37°36\'41″ в.д.',
+        map:'https://maps.google.com/?q=55.8200,37.6114',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ostankino_tower_at_night.jpg/600px-Ostankino_tower_at_night.jpg'
+      }
+    ],
+    meaning:'Маршрут показывает, как космическая эпоха сохранилась в современной Москве и стала частью городской идентичности — от монументальных ансамблей до живых музейных коллекций.'
+  },
+  {
+    num:'02',name:'Технологии будущего',
+    theme:'Космос, инженерия, связь и современные технологии — маршрут по объектам, формирующим технологический облик России.',
+    stops:[
+      {
+        name:'Центр «Космонавтика и авиация» на ВДНХ',
+        desc:'Крупнейшая в России постоянная экспозиция космической и авиационной техники. Здесь можно увидеть настоящие ракетные двигатели, тренажёры для подготовки космонавтов и интерактивные симуляторы стыковки.',
+        coords:'55°49\'33″ с.ш. · 37°37\'52″ в.д.',
+        map:'https://maps.google.com/?q=55.8258,37.6311',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/VDNKh_Cosmos_pavilion.jpg/800px-VDNKh_Cosmos_pavilion.jpg'
+      },
+      {
+        name:'Шуховская башня',
+        desc:'Гиперболоидная конструкция инженера Шухова (1922) — революция в строительстве лёгких несущих конструкций. Принципы, открытые при её возведении, легли в основу проектирования современных ракетных ферм и антенных систем.',
+        coords:'55°43\'41″ с.ш. · 37°36\'38″ в.д.',
+        map:'https://maps.google.com/?q=55.7281,37.6106',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Shukhov_tower_shabolovka_moscow.jpg/600px-Shukhov_tower_shabolovka_moscow.jpg'
+      },
+      {
+        name:'Останкинская телебашня',
+        desc:'Узловой элемент системы спутникового вещания России. Через неё ежесуточно проходит сигнал для 14 000 населённых пунктов страны. Конструкция башни держится на постоянном натяжении 149 стальных тросов.',
+        coords:'55°49\'12″ с.ш. · 37°36\'41″ в.д.',
+        map:'https://maps.google.com/?q=55.8200,37.6114',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ostankino_tower_at_night.jpg/600px-Ostankino_tower_at_night.jpg'
+      },
+      {
+        name:'Инновационный центр «Сколково»',
+        desc:'Российский технологический хаб, созданный в 2010 году. Здесь работают стартапы в области космических технологий, телекоммуникаций, биомедицины и ядерных технологий. Более 3 000 резидентов из 50 стран.',
+        coords:'55°41\'56″ с.ш. · 37°21\'29″ в.д.',
+        map:'https://maps.google.com/?q=55.6989,37.3581',
+        photo:''
+      },
+      {
+        name:'Штаб-квартира Роскосмоса',
+        desc:'Административный и стратегический центр российской космической отрасли. Отсюда координируются запуски на Байконур и Восточный, управление МКС и реализация национальной лунной программы.',
+        coords:'55°45\'01″ с.ш. · 37°37\'01″ в.д.',
+        map:'https://maps.google.com/?q=55.7503,37.6169',
+        photo:''
+      }
+    ],
+    meaning:'Маршрут демонстрирует непрерывную линию от советских инженерных прорывов к современным технологиям — как Россия удерживает позиции космической державы в XXI веке.'
+  },
+  {
+    num:'03',name:'Человек и космос',
+    theme:'Влияние космоса на культуру, архитектуру и общество — маршрут по местам, где космос стал частью городской жизни.',
+    stops:[
+      {
+        name:'Мемориальный музей космонавтики',
+        desc:'Личный музей эпохи: письма Гагарина, рабочие журналы Королёва, личные вещи космонавтов, которые побывали на орбите. Экспозиция «Люди и космос» — самая эмоциональная часть маршрута.',
+        coords:'55°49\'19″ с.ш. · 37°38\'16″ в.д.',
+        map:'https://maps.google.com/?q=55.8220,37.6378',
+        photo:''
+      },
+      {
+        name:'Памятник Юрию Гагарину на Ленинском проспекте',
+        desc:'42-метровая колонна с бронзовой фигурой Гагарина в скафандре установлена в 1980 году на пересечении Ленинского проспекта и улицы Косыгина. Гагарин здесь смотрит на звёздное небо — навсегда.',
+        coords:'55°42\'29″ с.ш. · 37°34\'48″ в.д.',
+        map:'https://maps.google.com/?q=55.7081,37.5800',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Gagarin_monument_Moscow.jpg/600px-Gagarin_monument_Moscow.jpg'
+      },
+      {
+        name:'Московский планетарий',
+        desc:'Старейший и крупнейший планетарий России, открытый в 1929 году. После реконструкции 2011 года стал современным научно-культурным центром с цифровым куполом диаметром 25 метров.',
+        coords:'55°45\'44″ с.ш. · 37°34\'26″ в.д.',
+        map:'https://maps.google.com/?q=55.7622,37.5739',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Moscow_Planetarium.jpg/800px-Moscow_Planetarium.jpg'
+      },
+      {
+        name:'ВДНХ и советская архитектура будущего',
+        desc:'Ансамбль ВДНХ — утопия в камне. Архитекторы 1950-х создавали не просто выставку, а образ будущего СССР. Фонтаны, шпили и аллеи спроектированы как декорация к наступающей эпохе космических побед.',
+        coords:'55°49\'42″ с.ш. · 37°37\'26″ в.д.',
+        map:'https://maps.google.com/?q=55.8283,37.6239',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/VDNKh_main_entrance.jpg/800px-VDNKh_main_entrance.jpg'
+      },
+      {
+        name:'Парк «Зарядье»',
+        desc:'Парк нового поколения у стен Кремля объединяет четыре климатические зоны России и предлагает уникальный медиазал «Полёт» — иммерсивный опыт путешествия над Россией с видом из космоса.',
+        coords:'55°45\'03″ с.ш. · 37°37\'30″ в.д.',
+        map:'https://maps.google.com/?q=55.7508,37.6250',
+        photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zaryadye_park_overview.jpg/800px-Zaryadye_park_overview.jpg'
+      }
+    ],
+    meaning:'Маршрут показывает, как идея космоса повлияла на культуру, искусство, архитектуру и восприятие будущего — и как этот импульс живёт в Москве по сей день.'
+  }
+];
+
+const pinIcon=`<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+
+function stopCard(s,j){
+  const photoBlock = s.photo
+    ? `<img src="${s.photo}" alt="${s.name}" onerror="this.parentElement.innerHTML=placeholderPhoto()">`
+    : placeholderPhoto();
+  return `
+  <div class="modal-stop">
+    <div class="stop-photo">
+      ${photoBlock}
+      <div class="stop-photo-corner tl"></div>
+      <div class="stop-photo-corner tr"></div>
+      <div class="stop-photo-corner bl"></div>
+      <div class="stop-photo-corner br"></div>
+    </div>
+    <div class="stop-info">
+      <div class="stop-info-header">
+        <div class="stop-info-left">
+          <div class="stop-badge">${String(j+1).padStart(2,'0')}</div>
+          <div class="stop-name">${s.name}</div>
+        </div>
+        <a class="stop-map-link" href="${s.map}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">${pinIcon.match(/<path[^>]+>/)[0]}</svg>
+          На карте
+        </a>
+      </div>
+      <div class="stop-desc">${s.desc}</div>
+      <div class="stop-coords">${s.coords}</div>
+    </div>
+  </div>`;
+}
+
+function placeholderPhoto(){
+  return `<div class="stop-photo-placeholder"><div class="photo-icon">📷</div><div class="photo-upload-hint">Фото места</div></div>`;
+}
+
+function openTour(i){
+  const t=tours[i];
+  const stopsHtml=t.stops.map((s,j)=>stopCard(s,j)).join('');
+  document.getElementById('modalBody').innerHTML=`
+    <div class="modal-tour-num">${t.num}</div>
+    <div class="modal-tour-title">${t.name}</div>
+    <div class="modal-tour-theme">${t.theme}</div>
+    <div class="modal-stops-label">Точки маршрута</div>
+    ${stopsHtml}
+    <div class="modal-footer">
+      <div class="modal-meaning-label">Смысл маршрута</div>
+      <div class="modal-meaning">${t.meaning}</div>
+    </div>`;
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('modal').scrollTop=0;
+}
+
+function closeModal(){
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modalBg').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+// Stars
+const starsEl=document.getElementById('stars');
+for(let i=0;i<180;i++){
+  const s=document.createElement('div');s.className='star';
+  const size=Math.random()*2+0.5,opacity=Math.random()*0.6+0.1;
+  s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*4}s;--min-op:${opacity*0.3};opacity:${opacity}`;
+  starsEl.appendChild(s);
+}
+
+// Cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-4+'px';cursor.style.top=my-4+'px'});
+(function animRing(){rx+=(mx-rx-16)*0.12;ry+=(my-ry-16)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
+document.querySelectorAll('a,button,.tour-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2)';ring.style.transform='scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='';ring.style.transform=''});
+});
+
+// Smooth scroll with overlay
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const target=document.querySelector(this.getAttribute('href'));
+    if(!target)return;
+    e.preventDefault();
+    const ov=document.getElementById('pageOverlay');
+    ov.classList.add('active');
+    setTimeout(()=>{target.scrollIntoView({behavior:'instant'});setTimeout(()=>ov.classList.remove('active'),300)},400);
+  });
+});
+</script>
+</body>
+</html>

@@ -83,9 +83,6 @@
         .modal-tour-title{font-family:'Unbounded',sans-serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
         .modal-tour-theme{font-size:13px;color:rgba(200,245,220,0.5);margin-bottom:32px;line-height:1.7;border-left:2px solid var(--g);padding-left:16px}
         .modal-stops-label{font-size:9px;letter-spacing:0.5em;color:var(--g);text-transform:uppercase;margin-bottom:20px}
-        .stop-photo{width:100%;height:200px;background:#030e07;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-        .stop-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
-        .stop-photo img:hover{transform:scale(1.02)}
         .stop-info{padding:18px 20px}
         .stop-info-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
         .stop-info-left{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
@@ -154,9 +151,12 @@
 </nav>
 
 <section id="hero">
-    <div class="hero-ring" style="width:600px;height:600px;--spd:60s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-    <div class="hero-ring" style="width:900px;height:900px;--spd:100s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-    <div class="hero-ring" style="width:1200px;height:1200px;--spd:140s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="hero-ring"
+         style="width:600px;height:600px;--spd:60s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="hero-ring"
+         style="width:900px;height:900px;--spd:100s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="hero-ring"
+         style="width:1200px;height:1200px;--spd:140s;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
     <div class="hero-orb"></div>
     <div class="hero-kicker">Виртуальный музей · Москва · 2026</div>
     <h1>108<br><span>минут</span></h1>
@@ -190,7 +190,9 @@
                 <div class="stop"><span class="stop-num">4</span><span>Музей космонавтики</span></div>
                 <div class="stop"><span class="stop-num">5</span><span>Останкинская телебашня</span></div>
             </div>
-            <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+            <div class="tour-cta">Открыть маршрут
+                <div class="tour-cta-arrow"></div>
+            </div>
         </div>
         <div class="tour-card" onclick="openTour(1)">
             <div class="tour-number">02</div>
@@ -204,7 +206,9 @@
                 <div class="stop"><span class="stop-num">4</span><span>Инновационный центр «Сколково»</span></div>
                 <div class="stop"><span class="stop-num">5</span><span>Штаб-квартира Роскосмоса</span></div>
             </div>
-            <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+            <div class="tour-cta">Открыть маршрут
+                <div class="tour-cta-arrow"></div>
+            </div>
         </div>
         <div class="tour-card" onclick="openTour(2)">
             <div class="tour-number">03</div>
@@ -218,7 +222,9 @@
                 <div class="stop"><span class="stop-num">4</span><span>ВДНХ и советская архитектура</span></div>
                 <div class="stop"><span class="stop-num">5</span><span>Парк «Зарядье»</span></div>
             </div>
-            <div class="tour-cta">Открыть маршрут<div class="tour-cta-arrow"></div></div>
+            <div class="tour-cta">Открыть маршрут
+                <div class="tour-cta-arrow"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -259,35 +265,33 @@
     const tours = [
       {num:'01',name:'Орбита памяти',theme:'История космоса и память о космической эпохе в Москве — маршрут по местам, которые сохранили дух великой эры.',
        stops:[
-         {name:'Павильон «Космос» на ВДНХ',desc:'Грандиозный павильон №34, перестроенный в 1954 году, стал первым в СССР публичным космическим музеем. Экспозиция включает подлинные спускаемые аппараты, скафандры и архивные материалы.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/VDNKh_Cosmos_pavilion.jpg/800px-VDNKh_Cosmos_pavilion.jpg'},
-         {name:'Аллея космонавтов',desc:'Аллея украшена бюстами советских и российских космонавтов — живая летопись пилотируемой космонавтики.',photo:'https://img-fotki.yandex.ru/get/178679/210407083.0/0_14b9b9_1c2c8d9_orig.jpg'},
-         {name:'Монумент «Покорителям космоса»',desc:'107-метровый обелиск в форме реактивной струи ракеты, покрытый титаном. Символ космической эры.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Monument_to_the_Conquerors_of_Space_2.jpg/800px-Monument_to_the_Conquerors_of_Space_2.jpg'},
-         {name:'Музей космонавтики',desc:'Коллекция свыше 85 000 экспонатов: лунные породы, личные вещи космонавтов, оборудование станции «Мир».',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Memorial_Museum_of_Cosmonautics_interior.jpg/800px-Memorial_Museum_of_Cosmonautics_interior.jpg'},
-         {name:'Останкинская телебашня',desc:'Построена в 1967 году для трансляции сигнала со спутников. Высота 540 метров.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ostankino_tower_at_night.jpg/600px-Ostankino_tower_at_night.jpg'}
+         {name:'Павильон «Космос» на ВДНХ',desc:'Грандиозный павильон №34, перестроенный в 1954 году, стал первым в СССР публичным космическим музеем. Экспозиция включает подлинные спускаемые аппараты, скафандры и архивные материалы.'},
+         {name:'Аллея космонавтов',desc:'Аллея украшена бюстами советских и российских космонавтов — живая летопись пилотируемой космонавтики.'},
+         {name:'Монумент «Покорителям космоса»',desc:'107-метровый обелиск в форме реактивной струи ракеты, покрытый титаном. Символ космической эры.'},
+         {name:'Музей космонавтики',desc:'Коллекция свыше 85 000 экспонатов: лунные породы, личные вещи космонавтов, оборудование станции «Мир».'},
+         {name:'Останкинская телебашня',desc:'Построена в 1967 году для трансляции сигнала со спутников. Высота 540 метров.'}
        ], meaning:'Маршрут показывает, как космическая эпоха сохранилась в современной Москве и стала частью городской идентичности.'},
       {num:'02',name:'Технологии будущего',theme:'Космос, инженерия, связь и современные технологии — маршрут по объектам, формирующим технологический облик России.',
        stops:[
-         {name:'Павильон «Космос» на ВДНХ',desc:'Грандиозный павильон №34, перестроенный в 1954 году, стал первым в СССР публичным космическим музеем. Экспозиция включает подлинные спускаемые аппараты, скафандры и архивные материалы.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/VDNKh_Cosmos_pavilion.jpg/800px-VDNKh_Cosmos_pavilion.jpg'},
-         {name:'Шуховская башня',desc:'Гиперболоидная конструкция инженера Шухова (1922) — основа современных антенных систем ракет.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Shukhov_tower_shabolovka_moscow.jpg/600px-Shukhov_tower_shabolovka_moscow.jpg'},
-         {name:'Останкинская телебашня',desc:'Узловой элемент системы спутникового вещания России.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ostankino_tower_at_night.jpg/600px-Ostankino_tower_at_night.jpg'},
-         {name:'Инновационный центр «Сколково»',desc:'Технологический хаб. Более 3000 резидентов, включая космические стартапы.',photo:'https://www.sk.ru/upload/medialibrary/210/210e2e5e6f6b1a9c7d3b7f1e1c4d8f6e/Sk_2.jpg'},
-         {name:'Штаб-квартира Роскосмоса',desc:'Стратегический центр российской космической отрасли. Координация МКС и лунной программы.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Roscosmos_HQ_Moscow.jpg/800px-Roscosmos_HQ_Moscow.jpg'}
+         {name:'Павильон «Космос» на ВДНХ',desc:'Грандиозный павильон №34, перестроенный в 1954 году, стал первым в СССР публичным космическим музеем. Экспозиция включает подлинные спускаемые аппараты, скафандры и архивные материалы.'},
+         {name:'Шуховская башня',desc:'Гиперболоидная конструкция инженера Шухова (1922) — основа современных антенных систем ракет.'},
+         {name:'Останкинская телебашня',desc:'Узловой элемент системы спутникового вещания России.'},
+         {name:'Инновационный центр «Сколково»',desc:'Технологический хаб. Более 3000 резидентов, включая космические стартапы.'},
+         {name:'Штаб-квартира Роскосмоса',desc:'Стратегический центр российской космической отрасли. Координация МКС и лунной программы.'}
        ], meaning:'Непрерывная линия от советских инженерных прорывов к современным технологиям.'},
       {num:'03',name:'Человек и космос',theme:'Влияние космоса на культуру, архитектуру и общество — маршрут по местам, где космос стал частью городской жизни.',
        stops:[
-         {name:'Музей космонавтики',desc:'Коллекция свыше 85 000 экспонатов: лунные породы, личные вещи космонавтов, оборудование станции «Мир».',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Memorial_Museum_of_Cosmonautics_interior.jpg/800px-Memorial_Museum_of_Cosmonautics_interior.jpg'},
-         {name:'Памятник Юрию Гагарину',desc:'42-метровая колонна с бронзовой фигурой Гагарина на Ленинском проспекте.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Gagarin_monument_Moscow.jpg/600px-Gagarin_monument_Moscow.jpg'},
-         {name:'Московский планетарий',desc:'Старейший планетарий России, после реконструкции — современный центр с цифровым куполом.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Moscow_Planetarium.jpg/800px-Moscow_Planetarium.jpg'},
-         {name:'ВДНХ и советская архитектура',desc:'Ансамбль ВДНХ — утопия будущего. Фонтаны и аллеи, спроектированные как декорация космических побед.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/VDNKh_main_entrance.jpg/800px-VDNKh_main_entrance.jpg'},
-         {name:'Парк «Зарядье»',desc:'Медиазал «Полёт» — иммерсивный опыт путешествия над Россией с видом из космоса.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zaryadye_park_overview.jpg/800px-Zaryadye_park_overview.jpg'}
+         {name:'Музей космонавтики',desc:'Коллекция свыше 85 000 экспонатов: лунные породы, личные вещи космонавтов, оборудование станции «Мир».'},
+         {name:'Памятник Юрию Гагарину',desc:'42-метровая колонна с бронзовой фигурой Гагарина на Ленинском проспекте.'},
+         {name:'Московский планетарий',desc:'Старейший планетарий России, после реконструкции — современный центр с цифровым куполом.'},
+         {name:'ВДНХ и советская архитектура',desc:'Ансамбль ВДНХ — утопия будущего. Фонтаны и аллеи, спроектированные как декорация космических побед.'},
+         {name:'Парк «Зарядье»',desc:'Медиазал «Полёт» — иммерсивный опыт путешествия над Россией с видом из космоса.'}
        ], meaning:'Как идея космоса повлияла на культуру, искусство и восприятие будущего.'}
     ];
 
     function stopCard(s, j) {
       const mapLink = mapLinks[s.name] || 'https://yandex.ru/maps/';
-      const imgSrc = s.photo;
-      const photoHtml = imgSrc ? `<img src="${imgSrc}" alt="${s.name}" loading="lazy" onerror="this.src='https://placehold.co/800x400/041a0c/00ff88?text=Космос+рядом'">` : `<div style="background:#0a1f12; width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#00ff8844;">🛸 фото места</div>`;
-      return `<div class="modal-stop"><div class="stop-photo">${photoHtml}</div><div class="stop-info"><div class="stop-info-header"><div class="stop-info-left"><div class="stop-badge">${String(j+1).padStart(2,'0')}</div><div class="stop-name">${s.name}</div></div><a class="stop-map-link" href="${mapLink}" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Яндекс.Карты</a></div><div class="stop-desc">${s.desc}</div></div></div>`;
+      return `<div class="modal-stop"><div class="stop-info"><div class="stop-info-header"><div class="stop-info-left"><div class="stop-badge">${String(j+1).padStart(2,'0')}</div><div class="stop-name">${s.name}</div></div><a class="stop-map-link" href="${mapLink}" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Яндекс.Карты</a></div><div class="stop-desc">${s.desc}</div></div></div>`;
     }
 
     function openTour(i){
